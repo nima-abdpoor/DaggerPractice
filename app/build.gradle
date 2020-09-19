@@ -23,6 +23,9 @@ android {
 }
 
 dependencies {
+    def dagger_version = "2.22"
+    def appcompat_version = "1.2.0"
+
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
@@ -30,4 +33,12 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
+
+    implementation "androidx.appcompat:appcompat:$appcompat_version"
+
+    implementation "com.google.dagger:dagger:$dagger_version"
+    annotationProcessor "com.google.dagger:dagger-compiler:$dagger_version"
+    implementation "com.google.dagger:dagger-android:2.x"
+    implementation "com.google.dagger:dagger-android-support:$dagger_version" // if you use the support libraries
+    annotationProcessor "com.google.dagger:dagger-android-processor:$dagger_version"
 }
