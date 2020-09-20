@@ -42,6 +42,11 @@ dependencies {
     implementation "com.google.android.material:material:$material_version"
 
 
+    // ViewModel and LiveData
+    def lifecycle_version = '2.2.0-alpha03'
+    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
+
+
     //dagger
     implementation "com.google.dagger:dagger:$dagger_version"
     annotationProcessor "com.google.dagger:dagger-compiler:$dagger_version"
