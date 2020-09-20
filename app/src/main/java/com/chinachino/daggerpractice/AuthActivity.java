@@ -14,11 +14,15 @@ public class AuthActivity extends DaggerAppCompatActivity {
     @Inject
     String asljflas;
 
+    @Inject
+    boolean isNull;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_auth);
         Log.d(TAG, "onCreate: " + asljflas);
+        Log.d(TAG, "onCreate: " + isNull);
     }
 
 
