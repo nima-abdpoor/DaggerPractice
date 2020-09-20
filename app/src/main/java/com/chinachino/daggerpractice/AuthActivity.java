@@ -32,5 +32,4 @@ public class AuthActivity extends DaggerAppCompatActivity {
         requestManager.load(logo)
                 .into((ImageView) findViewById(R.id.login_logo));
     }
-
 }
