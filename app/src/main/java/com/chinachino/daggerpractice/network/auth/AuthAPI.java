@@ -1,10 +1,12 @@
 package com.chinachino.daggerpractice.network.auth;
 
-import okhttp3.ResponseBody;
-import retrofit2.Call;
+import com.chinachino.daggerpractice.model.User;
+
+import io.reactivex.Flowable;
 import retrofit2.http.GET;
+import retrofit2.http.Path;
 
 public interface AuthAPI {
-    @GET
-    Call<ResponseBody> getFakeStuff();
+    @GET("users/{id}")
+    Flowable<User> getUsers(@Path("id") int id);
 }
