@@ -7,6 +7,7 @@ import androidx.lifecycle.LiveDataReactiveStreams;
 import androidx.lifecycle.MediatorLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.chinachino.daggerpractice.SessionManager;
 import com.chinachino.daggerpractice.model.User;
 import com.chinachino.daggerpractice.network.auth.AuthAPI;
 
@@ -20,16 +21,22 @@ public class AuthViewModel extends ViewModel {
     private AuthAPI authAPI;
     private MediatorLiveData<AuthResource<User>> authUser = new MediatorLiveData<>();
 
+    private SessionManager sessionManager;
+
     @Inject
-    public AuthViewModel(AuthAPI authAPI) {
+    public AuthViewModel(AuthAPI authAPI, SessionManager sessionManager) {
         this.authAPI = authAPI;
+        this.sessionManager = sessionManager;
         Log.d(TAG, "AuthViewModel: viewModel is working ...");
     }
 
     public void AuthenticateWithID(int userID) {
-        authUser.setValue(AuthResource.loading(null));
-        final LiveData<AuthResource<User>> source = LiveDataReactiveStreams.fromPublisher(
-                authAPI.getUsers(userID)
+       sessionManager.AuthenticateWithID(queryUserID(userID));
+    }
+
+    public LiveData<AuthResource<User>> queryUserID(int userId){
+        return LiveDataReactiveStreams.fromPublisher(
+                authAPI.getUsers(userId)
                         .onErrorReturn(throwable -> {
                             User user = new User();
                             user.setId(-1);
@@ -44,13 +51,9 @@ public class AuthViewModel extends ViewModel {
                         )
                         .subscribeOn(Schedulers.io())
         );
-        authUser.addSource(source, userAuthResource -> {
-            authUser.setValue(userAuthResource);
-            authUser.removeSource(source);
-        });
     }
 
-    public LiveData<AuthResource<User>> ObserveUser() {
-        return authUser;
+    public LiveData<AuthResource<User>> ObserveAuthUser() {
+        return sessionManager.getMediatorLiveData();
     }
 }

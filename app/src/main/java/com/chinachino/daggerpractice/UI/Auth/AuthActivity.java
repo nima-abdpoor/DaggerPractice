@@ -58,7 +58,7 @@ public class AuthActivity extends DaggerAppCompatActivity implements View.OnClic
     }
 
     public void subscribeObservers() {
-        viewModel.ObserveUser()
+        viewModel.ObserveAuthUser()
                 .observe(this, userAuthResource -> {
                     switch (userAuthResource.status) {
                         case LOADING: {

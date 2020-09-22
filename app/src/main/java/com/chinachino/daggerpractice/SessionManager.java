@@ -36,6 +36,7 @@ public class SessionManager {
     }
 
     public MediatorLiveData<AuthResource<User>> getMediatorLiveData() {
+
         return mediatorLiveData;
     }
 }
