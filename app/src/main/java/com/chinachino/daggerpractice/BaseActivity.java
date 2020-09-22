@@ -4,14 +4,10 @@ package com.chinachino.daggerpractice;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
-import androidx.lifecycle.Observer;
 
 import com.chinachino.daggerpractice.UI.Auth.AuthActivity;
-import com.chinachino.daggerpractice.UI.Auth.AuthResource;
-import com.chinachino.daggerpractice.model.User;
 
 import javax.inject.Inject;
 

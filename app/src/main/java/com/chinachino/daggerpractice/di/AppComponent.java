@@ -2,7 +2,7 @@ package com.chinachino.daggerpractice.di;
 
 import android.app.Application;
 
-import com.chinachino.daggerpractice.BaseActivity;
+import com.chinachino.daggerpractice.BaseApplication;
 import com.chinachino.daggerpractice.SessionManager;
 
 import javax.inject.Singleton;
@@ -11,6 +11,7 @@ import dagger.BindsInstance;
 import dagger.Component;
 import dagger.android.AndroidInjector;
 import dagger.android.support.AndroidSupportInjectionModule;
+import dagger.android.support.DaggerApplication;
 
 @Singleton
 @Component(
@@ -21,7 +22,7 @@ import dagger.android.support.AndroidSupportInjectionModule;
                 ViewModelFactoryModule.class,
         }
 )
-public interface AppComponent extends AndroidInjector<BaseActivity> {
+public interface AppComponent extends AndroidInjector<BaseApplication> {
     SessionManager sessionManager();
 
     @Component.Builder
@@ -29,7 +30,7 @@ public interface AppComponent extends AndroidInjector<BaseActivity> {
         @BindsInstance
         Builder Application(Application application);
 
-        AppComponent build();
+        AndroidInjector<? extends DaggerApplication> build();
     }
 
 }

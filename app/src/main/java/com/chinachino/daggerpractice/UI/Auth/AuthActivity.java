@@ -18,6 +18,7 @@ import com.chinachino.daggerpractice.R;
 import com.chinachino.daggerpractice.UI.main.MainActivity;
 import com.chinachino.daggerpractice.ViewModels.ViewModelProviderFactory;
 
+
 import javax.inject.Inject;
 
 import dagger.android.support.DaggerAppCompatActivity;
