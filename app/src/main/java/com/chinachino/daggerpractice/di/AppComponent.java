@@ -3,6 +3,7 @@ package com.chinachino.daggerpractice.di;
 import android.app.Application;
 
 import com.chinachino.daggerpractice.BaseActivity;
+import com.chinachino.daggerpractice.SessionManager;
 
 import javax.inject.Singleton;
 
@@ -21,6 +22,7 @@ import dagger.android.support.AndroidSupportInjectionModule;
         }
 )
 public interface AppComponent extends AndroidInjector<BaseActivity> {
+    SessionManager sessionManager();
 
     @Component.Builder
     interface Builder {
