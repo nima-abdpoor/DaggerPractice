@@ -1,5 +1,6 @@
 package com.chinachino.daggerpractice.UI.Auth;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -14,6 +15,7 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.bumptech.glide.RequestManager;
 import com.chinachino.daggerpractice.R;
+import com.chinachino.daggerpractice.UI.main.MainActivity;
 import com.chinachino.daggerpractice.ViewModels.ViewModelProviderFactory;
 
 import javax.inject.Inject;
@@ -22,7 +24,7 @@ import dagger.android.support.DaggerAppCompatActivity;
 
 public class AuthActivity extends DaggerAppCompatActivity implements View.OnClickListener {
 
-    private static final String TAG = "AuthActivity";
+    private static final String  TAG = "AuthActivity";
 
     private EditText UserInput;
     private ProgressBar progressBar;
@@ -73,6 +75,7 @@ public class AuthActivity extends DaggerAppCompatActivity implements View.OnClic
                         case AUTHENTICATED: {
                             Log.d(TAG, "onChanged: " + userAuthResource.data.getEmail());
                             showProgressBar(false);
+                            loginScreen();
                             break;
                         }
                         case NOT_AUTHENTICATED: {
@@ -81,6 +84,12 @@ public class AuthActivity extends DaggerAppCompatActivity implements View.OnClic
                         }
                     }
                 });
+    }
+
+    private void loginScreen() {
+        Intent intent = new Intent(AuthActivity.this, MainActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     private void showProgressBar(boolean isVisible) {
