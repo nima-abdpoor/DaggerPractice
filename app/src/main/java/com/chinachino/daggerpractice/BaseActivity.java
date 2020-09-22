@@ -16,13 +16,14 @@ import dagger.android.support.DaggerAppCompatActivity;
 public abstract class BaseActivity extends DaggerAppCompatActivity {
 
     @Inject
-    SessionManager sessionManager;
+    protected SessionManager sessionManager;
 
     private static final String TAG = "BaseActivity";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        subscribeObservers();
     }
     public void subscribeObservers(){
         sessionManager.getMediatorLiveData().observe(this, userAuthResource -> {
