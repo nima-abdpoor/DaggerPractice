@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 import com.chinachino.daggerpractice.BaseActivity;
 import com.chinachino.daggerpractice.R;
 import com.chinachino.daggerpractice.UI.main.profile.ProfileFragment;
+import com.chinachino.daggerpractice.UI.post.PostFragment;
 
 public class MainActivity extends BaseActivity {
 
@@ -28,7 +29,7 @@ public class MainActivity extends BaseActivity {
 
     private void testFragment() {
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.main_container,new ProfileFragment())
+                .replace(R.id.main_container,new PostFragment())
                 .commit();
     }
 
