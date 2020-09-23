@@ -4,6 +4,7 @@ import com.chinachino.daggerpractice.UI.Auth.AuthActivity;
 import com.chinachino.daggerpractice.UI.main.MainActivity;
 import com.chinachino.daggerpractice.di.auth.AuthModule;
 import com.chinachino.daggerpractice.di.auth.AuthViewModelsModule;
+import com.chinachino.daggerpractice.di.main.MainFragmentBuildersModule;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
@@ -16,6 +17,8 @@ public abstract class ActivityBuildersModule {
     )
     abstract AuthActivity ContributeAuthActivity();
 
-    @ContributesAndroidInjector
+    @ContributesAndroidInjector(
+            modules = {MainFragmentBuildersModule.class}
+    )
     abstract MainActivity ContributeMainActivity();
 }

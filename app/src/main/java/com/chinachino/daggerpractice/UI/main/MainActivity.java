@@ -1,6 +1,7 @@
 package com.chinachino.daggerpractice.UI.main;
 
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -11,6 +12,7 @@ import androidx.annotation.Nullable;
 
 import com.chinachino.daggerpractice.BaseActivity;
 import com.chinachino.daggerpractice.R;
+import com.chinachino.daggerpractice.UI.main.profile.ProfileFragment;
 
 public class MainActivity extends BaseActivity {
 
@@ -22,6 +24,13 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toast.makeText(this, "MainActivity", Toast.LENGTH_SHORT).show();
+        testFragment();
+    }
+
+    private void testFragment() {
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.main_container,new ProfileFragment())
+                .commit();
     }
 
     @Override
