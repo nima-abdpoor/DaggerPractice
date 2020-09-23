@@ -1,7 +1,6 @@
 package com.chinachino.daggerpractice.UI.main;
 
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
