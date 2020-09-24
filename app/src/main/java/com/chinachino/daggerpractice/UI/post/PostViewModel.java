@@ -17,6 +17,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
 
@@ -36,29 +37,32 @@ public class PostViewModel extends ViewModel {
         Log.d(TAG, "PostViewModel: viewModel is working ... ");
     }
     public LiveData<Resource<List<Post>>> observePosts(){
-        if (posts == null){
+        if(posts == null){
             posts = new MediatorLiveData<>();
-            posts.setValue(Resource.loading(null));
+            posts.setValue(Resource.loading((List<Post>)null));
 
             final LiveData<Resource<List<Post>>> source = LiveDataReactiveStreams.fromPublisher(
+
                     mainAPI.getPostsFromUser(sessionManager.getMediatorLiveData().getValue().data.getId())
-                    .onErrorReturn(throwable -> {
-                        Log.e(TAG, "apply: ", throwable);
-                        Post post = new Post();
-                        post.setId(-1);
-                        ArrayList<Post> posts = new ArrayList<>();
-                        posts.add(post);
-                        return posts;
-                    })
-                    .map(posts -> {
-                        if (posts.size() >0 ){
-                            if (posts.get(0).getId() == -1){
-                                return Resource.error("something went wronge...",posts);
-                            }
-                        }
-                        return Resource.success(posts);
-                    })
-                    .subscribeOn(Schedulers.io())
+
+                            .onErrorReturn(throwable -> {
+                                Log.e(TAG, "apply: ", throwable);
+                                Post post = new Post();
+                                post.setId(-1);
+                                ArrayList<Post> posts = new ArrayList<>();
+                                posts.add(post);
+                                return posts;
+                            })
+
+                            .map((Function<List<Post>, Resource<List<Post>>>) posts -> {
+                                if(posts.size() > 0){
+                                    if(posts.get(0).getId() == -1){
+                                        return Resource.error("Something went wrong", null);
+                                    }
+                                }
+                                return Resource.success(posts);
+                            })
+                            .subscribeOn(Schedulers.io())
             );
             posts.addSource(source, listResource -> {
                 posts.setValue(listResource);
