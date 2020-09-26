@@ -67,6 +67,13 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             case R.id.nav_post: {
                 break;
             }
+            case R.id.home:{
+                if(drawerLayout.isDrawerOpen(GravityCompat.START)){
+                    drawerLayout.closeDrawer(GravityCompat.START);
+                    return true;
+                }
+                else return false;
+            }
             case R.id.nav_profile: {
                 Navigation.findNavController(this, R.id.nav_host_fragment).navigate(R.id.profile_screen);
                 break;
@@ -75,5 +82,10 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         menuItem.setChecked(true);
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        return NavigationUI.navigateUp(Navigation.findNavController(this,R.id.nav_host_fragment),drawerLayout);
     }
 }
